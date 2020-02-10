@@ -1,14 +1,8 @@
 #include <iostream>
 #include <cstdlib>
-#include <string>
-#include <cstring>
-#include <cstdio>
-#include <cmath>
 #include <fstream>
 #include <iomanip>
-#include <thread>
 #include <time.h>
-#include <stdio.h>
 
 using namespace std;
 
