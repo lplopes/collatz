@@ -15,9 +15,9 @@
 	<h2>Secuencia de Collatz para n = 18.</h2>
 	<p id="demo"></p>
 	<script>
-		var myJSON = '{"n1":"18", "n2":"9", "n3":"28", "n4":"14", "n5":"7", "n6":"22", "n7":"11", "n8":"34", "n9":"17", "n10":"52", "n11":"26", "n12":"13", "n13":"40", "n14":"20", "n15":"10", "n16":"5", "n17":"16", "n18":"8", "n19":"4", "n20":"2", "n21":"1"}';
+		var myJSON = '{"n":[18, 9, 28, 14, 7, 22, 11, 34, 17, 52, 26, 13, 40, 20, 10, 5, 16, 8, 4, 2, 1]}';
 		var myObj = JSON.parse(myJSON);
-		document.getElementById("demo").innerHTML = myObj.n1 + " " + myObj.n2 + " " + myObj.n3 + " " + myObj.n4 + " " + myObj.n5 + " " + myObj.n6 + " " + myObj.n7 + " " + myObj.n8 + " " + myObj.n9 + " " + myObj.n10 + " " + myObj.n11 + " " + myObj.n12 + " " + myObj.n13 + " " + myObj.n14 + " " + myObj.n15 + " " + myObj.n16 + " " + myObj.n17 + " " + myObj.n18 + " " + myObj.n19 + " " + myObj.n20 + " " + myObj.n21;
+		document.getElementById("demo").innerHTML = myObj.n[0] + " " + myObj.n[1] + " " + myObj.n[2] + " " + myObj.n[3] + " " + myObj.n[4] + " " + myObj.n[5] + " " + myObj.n[6] + " " + myObj.n[7] + " " + myObj.n[8] + " " + myObj.n[9] + " " + myObj.n[10] + " " + myObj.n[11] + " " + myObj.n[12] + " " + myObj.n[13] + " " + myObj.n[14] + " " + myObj.n[15] + " " + myObj.n[16] + " " + myObj.n[17] + " " + myObj.n[18] + " " + myObj.n[19] + " " + myObj.n[20];
 	</script>
 </body>
 </html>

@@ -57,19 +57,15 @@ int main()
     salida << "\t<h2>Secuencia de Collatz para n = " << n[0] << ".</h2>" << endl;
     salida << "\t<p id=\"demo\"></p>" << endl;
     salida << "\t<script>" << endl;
-    salida << "\t\tvar myJSON = '{\"n";
+    salida << "\t\tvar myJSON = '{\"n\":[";
     for(j = 0; j < i; j++)
-    {
-        salida << j + 1 << "\":\"";
-        salida << n[j] << "\", \"n";
-    }
-    salida << i + 1 << "\":\"";
-    salida << n[i] << "\"}';" << endl;
+        salida << n[j] << ", ";
+    salida << n[i] << "]}';" << endl;
     salida << "\t\tvar myObj = JSON.parse(myJSON);" << endl;
-    salida << "\t\tdocument.getElementById(\"demo\").innerHTML = myObj.n";
+    salida << "\t\tdocument.getElementById(\"demo\").innerHTML = myObj.n[";
     for(j = 0; j < i; j++)
-        salida << j + 1 << " + \" \" + myObj.n";
-    salida << i + 1 << ";" << endl;
+        salida << j << "] + \" \" + myObj.n[";
+    salida << i << "];" << endl;
     salida << "\t</script>" << endl;
     salida << "</body>" << endl;
     salida << "</html>" << endl;
