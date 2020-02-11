@@ -10,7 +10,7 @@ int main()
 {
     //Declaracion de variables
     unsigned int *n, i, j;
-    double cput;
+    float cput;
     clock_t start, endp;
     ofstream salida;
 
