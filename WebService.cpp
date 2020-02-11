@@ -14,15 +14,15 @@ int main()
     clock_t start, endp;
     ofstream salida;
 
-	//Alocar memoria
-	n = (unsigned int *) malloc(sizeof(unsigned int));
+    //Alocar memoria
+    n = (unsigned int *) malloc(sizeof(unsigned int));
 
     //Entrada del numero
     cout << "n: ";
     cin >> n[0];
 
     //Tiempo de procesameinto
-	start = clock();
+    start = clock();
 
     //Definir la secuencia
     i = 0;
@@ -75,9 +75,9 @@ int main()
     free(n);
 
     //Calcula o tempo de processamento e imprime na tela
-	endp = clock();
-	cput = ((float)(endp - start)) / CLOCKS_PER_SEC;
-	cout << "Tiempo de procesamiento: " << setprecision(3) << cput << " s.\n";
+    endp = clock();
+    cput = ((float)(endp - start)) / CLOCKS_PER_SEC;
+    cout << "Tiempo de procesamiento: " << setprecision(3) << cput << " s.\n";
 
     return 0;
 }
