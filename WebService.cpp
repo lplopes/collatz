@@ -1,18 +1,25 @@
 #include <iostream>
 #include <cstdlib>
+#include <string>
 #include <fstream>
 #include <iomanip>
 #include <time.h>
+#include "/home/leandro/Desktop/rapidjson-master/include/rapidjson/document.h"
+#include "/home/leandro/Desktop/rapidjson-master/include/rapidjson/writer.h"
+#include "/home/leandro/Desktop/rapidjson-master/include/rapidjson/stringbuffer.h"
 
 using namespace std;
+using namespace rapidjson;
 
 int main()
 {
     //Declaracion de variables
     unsigned int *n, i, j;
     float cput;
+    string a;
     clock_t start, endp;
     ofstream salida;
+    Document d;
 
     //Alocar memoria
     n = (unsigned int *) malloc(sizeof(unsigned int));
@@ -34,17 +41,28 @@ int main()
         else
             n[i] = n[i - 1] / 2;
     }
-
-    //Escribir secuencia
-    for(j = 0; j <= i; j++)
-        cout << n[j] << " ";
-    cout << "\n";
+    
+    //Almacenar el arreglo JSON
+    a = "{\"n\":[";
+    for(j = 0; j < i; j++)
+        a += to_string(n[j]) + ", ";
+    a += to_string(n[i]) + "]}";
+    salida.open("Arreglo.json");
+    salida << a;
+    salida.close();
+    
+    //Entrega del arreglo JSON
+    const char* json = a.c_str();
+    d.Parse(json);
+    Value& s = d["n"];
+    StringBuffer buffer;
+    Writer<StringBuffer> writer(buffer);
+    d.Accept(writer);
+    cout << buffer.GetString() << endl;
 
     //Reportar el teste
-    salida.open("Reporte.html");
-    salida << "<!DOCTYPE html>" << endl;
-    salida << "<html lang = \"es\">\n" << endl;
-    salida << "<head>" << endl;
+    salida.open("reporte.html");
+    salida << "<!DOCTYPE html>\n<html lang = \"es\">\n\n<head>" << endl;
     salida << "\t<meta charset = \"UTF-8\">" << endl;
     salida << "\t<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">" << endl;
     salida << "\t<title>Secuencia de Collatz</title>" << endl;
@@ -57,10 +75,7 @@ int main()
     salida << "\t<h2>Secuencia de Collatz para n = " << n[0] << ".</h2>" << endl;
     salida << "\t<p id=\"demo\"></p>" << endl;
     salida << "\t<script>" << endl;
-    salida << "\t\tvar myJSON = '{\"n\":[";
-    for(j = 0; j < i; j++)
-        salida << n[j] << ", ";
-    salida << n[i] << "]}';" << endl;
+    salida << "\t\tvar myJSON = '" + a + "';" << endl;
     salida << "\t\tvar myObj = JSON.parse(myJSON);" << endl;
     salida << "\t\tdocument.getElementById(\"demo\").innerHTML = myObj.n[";
     for(j = 0; j < i; j++)
