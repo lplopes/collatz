@@ -41,7 +41,7 @@ int main()
         else
             n[i] = n[i - 1] / 2;
     }
-    
+
     //Almacenar el arreglo JSON
     a = "{\"n\":[";
     for(j = 0; j < i; j++)
@@ -50,7 +50,7 @@ int main()
     salida.open("Arreglo.json");
     salida << a;
     salida.close();
-    
+
     //Entrega del arreglo JSON
     const char* json = a.c_str();
     d.Parse(json);
@@ -61,7 +61,7 @@ int main()
     cout << buffer.GetString() << endl;
 
     //Reportar el teste
-    salida.open("reporte.html");
+    salida.open("reporte.php");
     salida << "<!DOCTYPE html>\n<html lang = \"es\">\n\n<head>" << endl;
     salida << "\t<meta charset = \"UTF-8\">" << endl;
     salida << "\t<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">" << endl;
@@ -69,15 +69,39 @@ int main()
     salida << "\t<link href=\"https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap\" rel=\"stylesheet\">" << endl;
     salida << "\t<style>" << endl;
     salida << "\t\tbody{font-family: 'Roboto Mono', monospace;}" << endl;
+    salida << "\t\tinput[type=number]{padding: 10px; width: 30px; height: 24px; font-size: 1em; text-align: center;}" << endl;
+    salida << "\t\tinput[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button{-webkit-appearance: none}" << endl;
     salida << "\t</style>" << endl;
+    salida << "\t<script  type = \"text/javascript\">" << endl;
+    salida << "\t\tvar n;" << endl;
+    salida << "\t\tfunction inputFocus(i){n = i.value;\ti.value = \"\";}" << endl;
+    salida << "\t\tfunction inputBlur(i){if (i.value == \"\") i.value = n; else document.getElementById(\"entrada\").submit();}" << endl;
+    salida << "\t\tfunction begin(){if (document.getElementById(\"n\").value == \"\") document.getElementById(\"n\").value = <?php $n = filter_input(INPUT_GET, \"n\"); $handle = exec(\"Collatz\"); echo $n;?>;}" << endl;
+    salida << "\t</script>" << endl;
     salida << "</head>\n" << endl;
-    salida << "<body>" << endl;
-    salida << "\t<h2>Secuencia de Collatz para n = " << n[0] << ".</h2>" << endl;
-    salida << "\t<p id=\"demo\"></p>" << endl;
+    salida << "<body onload = \"begin()\">" << endl;
+    salida << "\t<form id = \"entrada\" action = \"reporte.php\" method = \"get\" target = \"_self\">" << endl;
+    salida << "\t\t<h2>" << endl;
+    salida << "\t\t\t<span>Secuencia de Collatz para n =&nbsp;</span>" << endl;
+    salida << "\t\t\t<span>" << endl;
+    salida << "\t\t\t\t<input type = \"number\" id = \"n\" name = \"n\" title = \"Numero\" onfocus = \"inputFocus(this)\" onblur = \"inputBlur(this)\" />" << endl;
+    salida << "\t\t\t</span>" << endl;
+    salida << "\t\t</h2>" << endl;
+    salida << "\t</form>" << endl;
+    salida << "\t<p id=\"sec\"></p>" << endl;
     salida << "\t<script>" << endl;
-    salida << "\t\tvar myJSON = '" + a + "';" << endl;
+    salida << "\t\tvar myJSON;" << endl;
+    salida << "\t\tfunction readTextFile(file){" << endl;
+    salida << "\t\t\tvar rawFile = new XMLHttpRequest();" << endl;
+    salida << "\t\t\trawFile.open(\"GET\", file, false);" << endl;
+    salida << "\t\t\trawFile.onreadystatechange = function(){" << endl;
+    salida << "\t\t\t\tif(rawFile.readyState === 4)" << endl;
+    salida << "\t\t\t\t\tif(rawFile.status === 200 || rawFile.status == 0)" << endl;
+    salida << "\t\t\t\t\t\tmyJSON = rawFile.responseText;\n\t\t\t}" << endl;
+    salida << "\t\t\trawFile.send(null);\n\t\t}" << endl;
+    salida << "\t\treadTextFile(\"Arreglo.json\");" << endl;
     salida << "\t\tvar myObj = JSON.parse(myJSON);" << endl;
-    salida << "\t\tdocument.getElementById(\"demo\").innerHTML = myObj.n[";
+    salida << "\t\tdocument.getElementById(\"sec\").innerHTML = myObj.n[";
     for(j = 0; j < i; j++)
         salida << j << "] + \" \" + myObj.n[";
     salida << i << "];" << endl;
