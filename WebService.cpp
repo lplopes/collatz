@@ -76,7 +76,7 @@ int main()
     salida << "\t\tvar n;" << endl;
     salida << "\t\tfunction inputFocus(i){n = i.value;\ti.value = \"\";}" << endl;
     salida << "\t\tfunction inputBlur(i){if (i.value == \"\") i.value = n; else document.getElementById(\"entrada\").submit();}" << endl;
-    salida << "\t\tfunction begin(){if (document.getElementById(\"n\").value == \"\") document.getElementById(\"n\").value = <?php $n = filter_input(INPUT_GET, \"n\"); $handle = exec(\"Collatz\"); echo $n;?>;}" << endl;
+    salida << "\t\tfunction begin(){if (document.getElementById(\"n\").value == \"\") document.getElementById(\"n\").value = <?php $n = filter_input(INPUT_GET, \"n\"); $handle = exec(\"START Collatz\"); echo $n;?>;}" << endl;
     salida << "\t</script>" << endl;
     salida << "</head>\n" << endl;
     salida << "<body onload = \"begin()\">" << endl;
